@@ -4,7 +4,6 @@
 </div>
 
 ## Dependencias del Proyecto
-### **Dependencias principales**
 - [`cors`](https://www.npmjs.com/package/cors) `^2.8.5` - Middleware para habilitar CORS (Cross-Origin Resource Sharing).
 - [`dotenv`](https://www.npmjs.com/package/dotenv) `^16.4.5` - Carga variables de entorno desde un archivo `.env`.
 - [`express`](https://www.npmjs.com/package/express) `^4.21.0` - Framework web minimalista para Node.js.
@@ -13,8 +12,6 @@
 - [`passport`](https://www.npmjs.com/package/passport) `^0.7.0` - Middleware de autenticación para Node.js.
 - [`passport-google-oauth20`](https://www.npmjs.com/package/passport-google-oauth20) `^2.0.0` - Estrategia de autenticación de Google para Passport.
 - [`sequelize`](https://www.npmjs.com/package/sequelize) `^6.37.6` - ORM para bases de datos SQL en Node.js.
-
-### **Dependencias de desarrollo**
 - [`nodemon`](https://www.npmjs.com/package/nodemon) `^3.1.9` - Reinicia automáticamente el servidor al detectar cambios en los archivos.
 
 ## Guía de Instalación.
