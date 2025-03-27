@@ -87,7 +87,7 @@ La conexión a la base de datos se establece en el archivo de configuración `ba
 > Este proyecto se encuentra en estado **En Desarrollo**, lo que significa que el proyecto está en plena fase de desarrollo, con funcionalidades siendo añadidas y pruebas en curso. Puede contener errores o estar sujeto a cambios importantes.
 
 ## Versiones.
-- **Version Actual**: v3.4.
+- **Version Actual**: v3.7.
 
 ## Autores.
 [MiguelMartinez30 - @DevDarkSonic](https://github.com/Miguel-Antonio-Martinez-Jimenez)
