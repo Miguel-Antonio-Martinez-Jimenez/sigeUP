@@ -91,6 +91,7 @@ La conexión a la base de datos se establece en el archivo de configuración `ba
 
 ## Autores.
 [MiguelMartinez30 - @DevDarkSonic](https://github.com/Miguel-Antonio-Martinez-Jimenez)
+[FranciscoAguilarM](https://github.com/FranciscoAguilarM)
 
 ## Licencia.
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
