@@ -3,6 +3,176 @@ const { Op } = require('sequelize');
 const EmailService = require('../services/validar_email.service');
 
 const CalificacionesController = {
+  obtenerCalificacionPorId: async (req, res) => {
+    try {
+      const { idKardex } = req.params;
+      const { email } = req.query;
+      
+      if (!email) {
+        return res.status(400).json({ 
+          success: false,
+          error: 'El email es requerido' 
+        });
+      }
+
+      // Validar el email y obtener el rol del usuario
+      const usuario = await EmailService.identifyEmailRole(email);
+      if (!usuario.success) {
+        return res.status(403).json(usuario);
+      }
+
+      // Configuración base de la consulta
+      const include = [
+        {
+          model: db.Clase,
+          as: 'Clase',
+          include: [
+            {
+              model: db.Curso,
+              as: 'Curso',
+              include: [{
+                model: db.Materia,
+                as: 'Materia',
+                attributes: ['Nombre']
+              }]
+            },
+            {
+              model: db.Docente,
+              as: 'Docente',
+              include: [{
+                model: db.DatosPersonales,
+                as: 'DatosPersonales',
+                attributes: ['Nombre', 'ApellidoPaterno', 'CorreoPersonal']
+              }]
+            },
+            {
+              model: db.Grupo,
+              as: 'Grupo',
+              include: [{
+                model: db.ProgramaEducativo,
+                as: 'ProgramaEducativo',
+                attributes: ['NombreCorto']
+              }]
+            }
+          ]
+        },
+        {
+          model: db.Alumno,
+          as: 'Alumno',
+          include: [
+            {
+              model: db.DatosPersonales,
+              as: 'DatosPersonales',
+              attributes: ['CorreoPersonal']
+            },
+            {
+              model: db.ProgramaEducativo,
+              as: 'ProgramaEducativo',
+              attributes: ['NombreCorto']
+            }
+          ]
+        },
+        {
+          model: db.DetalleKardex,
+          as: 'Detalles',
+          order: [['Unidad', 'ASC']],
+          attributes: ['Unidad', 'Calificacion']
+        }
+      ];
+
+      // Buscar la calificación específica
+      const calificacion = await db.Kardex.findOne({
+        where: { IdKardex: idKardex },
+        include: include,
+        attributes: ['IdKardex', 'Matricula', 'IdClase', 'CalificacionFinal', 'Acreditado', 'TipoAcreditacion']
+      });
+
+      if (!calificacion) {
+        return res.status(404).json({
+          success: false,
+          error: 'Calificación no encontrada'
+        });
+      }
+
+      // Verificar permisos según el rol
+      switch(usuario.role) {
+        case 'Estudiante':
+          if (calificacion.Matricula !== usuario.data?.matricula) {
+            return res.status(403).json({
+              success: false,
+              error: 'No tienes permiso para ver esta calificación'
+            });
+          }
+          break;
+          
+        case 'Docente':
+          // Verificar si el docente está asignado a esta clase
+          const docenteAsignado = await db.Clase.findOne({
+            where: { 
+              IdClase: calificacion.IdClase,
+              '$Docente.DatosPersonales.CorreoPersonal$': email
+            },
+            include: [{
+              model: db.Docente,
+              as: 'Docente',
+              include: [{
+                model: db.DatosPersonales,
+                as: 'DatosPersonales'
+              }]
+            }]
+          });
+          
+          if (!docenteAsignado) {
+            return res.status(403).json({
+              success: false,
+              error: 'No tienes permiso para ver esta calificación'
+            });
+          }
+          break;
+          
+        case 'Servicios Escolares':
+          // Tienen acceso a todas las calificaciones
+          break;
+          
+        default:
+          return res.status(403).json({
+            success: false,
+            error: 'No tienes permiso para ver calificaciones'
+          });
+      }
+
+      // Formatear la respuesta
+      const calificacionFormateada = {
+        IdKardex: calificacion.IdKardex,
+        Matricula: calificacion.Matricula,
+        CorreoAlumno: calificacion.Alumno?.DatosPersonales?.CorreoPersonal,
+        Materia: calificacion.Clase?.Curso?.Materia?.Nombre,
+        CalificacionFinal: calificacion.CalificacionFinal,
+        Acreditado: calificacion.Acreditado,
+        TipoAcreditacion: calificacion.TipoAcreditacion,
+        ProgramaEducativo: calificacion.Alumno?.ProgramaEducativo?.NombreCorto,
+        ...(usuario.role === 'Docente' && {
+          NombreDocente: calificacion.Clase?.Docente?.DatosPersonales?.Nombre,
+          CorreoDocente: email
+        }),
+        Detalles: calificacion.Detalles
+      };
+
+      res.json({
+        success: true,
+        calificacion: calificacionFormateada
+      });
+
+    } catch (error) {
+      console.error('Error en obtenerCalificacionPorId:', error);
+      res.status(500).json({ 
+        success: false,
+        error: 'Error al obtener la calificación',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
+  },
+
   obtenerCalificaciones: async (req, res) => {
     try {
       const { email } = req.query;

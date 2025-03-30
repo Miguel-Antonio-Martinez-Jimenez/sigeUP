@@ -9,6 +9,7 @@ const db = require('./src/models/index');
 const emailRoutes = require('./src/routes/email.routes');
 const permisosRoutes = require('./src/routes/permisos.routes');
 const calificacionesRoutes = require('./src/routes/calificaciones.routes');
+const planesEstudioRoutes = require('./src/routes/planesEstudio.routes');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/email', emailRoutes);
 app.use('/api', permisosRoutes);
 app.use('/calificaciones', calificacionesRoutes);
+app.use('/planes-estudio', planesEstudioRoutes);
 
 // Ruta de prueba
 app.get('/prueba-sesion', (req, res) => {

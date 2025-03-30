@@ -3,6 +3,9 @@ const CalificacionesController = require('../controllers/calificaciones.controll
 
 const router = express.Router();
 
+// Obtener una calificación específica
+router.get('/:idKardex', CalificacionesController.obtenerCalificacionPorId);
+
 // Obtener calificaciones (según rol)
 router.get('/', CalificacionesController.obtenerCalificaciones);
 
