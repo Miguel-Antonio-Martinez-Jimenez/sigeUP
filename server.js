@@ -10,6 +10,7 @@ const emailRoutes = require('./src/routes/email.routes');
 const permisosRoutes = require('./src/routes/permisos.routes');
 const calificacionesRoutes = require('./src/routes/calificaciones.routes');
 const planesEstudioRoutes = require('./src/routes/planesEstudio.routes');
+const periodosRoutes = require('./src/routes/periodos.routes');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/email', emailRoutes);
 app.use('/api', permisosRoutes);
 app.use('/calificaciones', calificacionesRoutes);
 app.use('/planes-estudio', planesEstudioRoutes);
+app.use('/periodos', periodosRoutes);
 
 // Ruta de prueba
 app.get('/prueba-sesion', (req, res) => {

@@ -5,45 +5,45 @@
 <br/>
 
 ## 📦 Dependencias del Proyecto
-- **express** `^4.18.2` - Framework web para Node.js
-- **sequelize** `^6.35.1` - ORM para bases de datos SQL
-- **mysql2** `^3.6.2` - Cliente MySQL para Node.js
-- **dotenv** `^16.4.7` - Manejo de variables de entorno
-- **body-parser** `^1.20.2` - Analiza cuerpos de solicitudes HTTP
-- **cors** `^2.8.5` - Habilita CORS para la API
-- **express-session** `^1.18.1` - Manejo de sesiones
-- **nodemon** `^3.0.2` - Reinicio automático del servidor en desarrollo
+- *express* ^4.18.2 - Framework web para Node.js
+- *sequelize* ^6.35.1 - ORM para bases de datos SQL
+- *mysql2* ^3.6.2 - Cliente MySQL para Node.js
+- *dotenv* ^16.4.7 - Manejo de variables de entorno
+- *body-parser* ^1.20.2 - Analiza cuerpos de solicitudes HTTP
+- *cors* ^2.8.5 - Habilita CORS para la API
+- *express-session* ^1.18.1 - Manejo de sesiones
+- *nodemon* ^3.0.2 - Reinicio automático del servidor en desarrollo
 
 ## 🚀 Guía de Instalación.
 1. Clona el repositorio del proyecto desde GitHub o descarga el archivo ZIP.
-    ```bash
+    bash
     git clone https://github.com/tu-usuario/sistema-escolar-backend.git
 2. Accede a la carpeta del proyecto que has clonado.
 3. Asegúrate de tener Node.js instalado.
 4. Navega a la carpeta del proyecto (donde se encuentra el archivo package.json) y sigue los pasos de Instalación de Dependencias.
 
-## 🛠️ Instalación de Dependencias
+## 🛠 Instalación de Dependencias
 ###  Instalación automática
     npm install
 Instala todas las dependencias listadas en `package.json`
  ### Instalación manual completa
 - #### Dependencias principales
-    ```bash
+    bash
     npm install express@^4.18.2 sequelize@^6.35.1 mysql2@^3.6.2 dotenv@^16.4.7 
 - #### Middlewares esenciales
-    ```bash
+    bash
     npm install body-parser@^1.20.2 cors@^2.8.5 express-session@^1.18.1
 - #### Seguridad avanzada
-    ```bash
+    bash
     npm install helmet bcryptjs express-rate-limit
 - #### Autenticación JWT
-    ```bash
+    bash
     npm install jsonwebtoken passport passport-jwt
 - #### Logging y documentación
-    ```bash
+    bash
     npm install winston morgan swagger-jsdoc swagger-ui-express
 - #### Dependencias de desarrollo
-    ```bash
+    bash
     npm install --save-dev nodemon@^3.0.2 jest supertest
 
 ## 📂 Estructura del Proyecto
@@ -76,14 +76,14 @@ Instala todas las dependencias listadas en `package.json`
 ## 📊 Configuración Inicial.
 1. Instalar los requisitos del proyecto.
 2. Asegúrate de tener MySQL corriendo y crea la base de datos utilizando:
-     ```bash
+     bash
      CREATE DATABASE sigeup;
 - al ejecutar el sistema se crearan las tablas automaticamente...
-3. Configurar el archivo `.env` para poder realizar la conexión.
+3. Configurar el archivo .env para poder realizar la conexión.
 
 
-## Configuración del Entorno (`.env`)
-Antes de ejecutar el proyecto, es necesario configurar las variables de entorno. Crea un archivo `backend/.env` en la raíz del proyecto y copia la siguiente configuración:
+## Configuración del Entorno (.env)
+Antes de ejecutar el proyecto, es necesario configurar las variables de entorno. Crea un archivo backend/.env en la raíz del proyecto y copia la siguiente configuración:
 
     # Configuración de la Base De Datos (MySQL)
     DB_HOST=localhost
@@ -110,7 +110,7 @@ Antes de ejecutar el proyecto, es necesario configurar las variables de entorno.
     # Modo de ejecución de la aplicación (development para desarrollo, production para producción)
 
 ## Conexión con la Base de Datos.
-La conexión a la base de datos se establece en el archivo de configuración `backend/src/config/db.config.js`. Aquí está un ejemplo de cómo podría lucir:
+La conexión a la base de datos se establece en el archivo de configuración backend/src/config/db.config.js. Aquí está un ejemplo de cómo podría lucir:
 
     require('dotenv').config();
 
@@ -132,3 +132,18 @@ La conexión a la base de datos se establece en el archivo de configuración `ba
         freezeTableName: true
       }
     };
+
+## 🌟 Estado del Proyecto
+*Estado Actual:* En Desarrollo.
+> [!Note]
+> Este proyecto se encuentra en estado *En Desarrollo*, lo que significa que todas las funcionalidades planeadas han sido implementadas y probadas satisfactoriamente. El código está disponible para su uso y estudio, y se aceptan contribuciones para mejoras o nuevas características.
+
+## 🤝 Contribuciónes
+> [!Tip]
+> Si deseas contribuir al proyecto, reportar errores o proponer mejoras, te invitamos a abrir un pull request o issue en el repositorio. También puedes contactarme directamente para compartir tus ideas o sugerencias a través de mi correo electrónico miguelantoniomartinezjimenez00@gmail.com. ¡Toda colaboración es bienvenida!
+
+## 🖋 Autores
+[MiguelMartinez30 - @DevDarkSonic](https://github.com/Miguel-Antonio-Martinez-Jimenez)
+
+## 📜 Licencia
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
